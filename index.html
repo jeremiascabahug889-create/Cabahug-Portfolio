@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremias B. Cabahug Jr. - Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #ec4899;
+            --accent: #14b8a6;
+            --dark: #0f172a;
+            --light: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Wave Background */
+        .wave-background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.05)"/></svg>') repeat-x;
+            animation: wave 25s linear infinite;
+        }
+
+        .wave:nth-child(2) {
+            top: 10%;
+            animation: wave 20s linear infinite reverse;
+            opacity: 0.5;
+        }
+
+        .wave:nth-child(3) {
+            top: 20%;
+            animation: wave 30s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1.5s; }
+        .particle:nth-child(10) { left: 15%; animation-delay: 3.5s; }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 60px;
+            padding: 20px 50px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: navSlide 1s ease-out;
+        }
+
+        @keyframes navSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 12px 28px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 40px;
+            transform: scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::before {
+            transform: scale(1);
+        }
+
+        nav a:hover {
+            transform: translateY(-3px);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .profile-container {
+            position: relative;
+            margin-bottom: 50px;
+            animation: profileEntry 1.2s ease-out;
+        }
+
+        @keyframes profileEntry {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .profile-circle {
+            width: 220px;
+            height: 220px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5.5em;
+            font-weight: 900;
+            color: #1a1a2e;
+            box-shadow: 
+                0 0 60px rgba(255, 215, 0, 0.6),
+                0 0 100px rgba(255, 140, 0, 0.4);
+            position: relative;
+            z-index: 2;
+            animation: avatarGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 60px rgba(255, 215, 0, 0.6),
+                    0 0 100px rgba(255, 140, 0, 0.4);
+            }
+            50% {
+                box-shadow: 
+                    0 0 80px rgba(255, 215, 0, 0.8),
+                    0 0 120px rgba(255, 140, 0, 0.6);
+            }
+        }
+
+        .orbit-ring {
+            position: absolute;
+            border: 3px solid rgba(255, 215, 0, 0.4);
+            border-radius: 50%;
+            animation: orbitRotate 15s linear infinite;
+        }
+
+        .orbit-ring-1 {
+            width: 260px;
+            height: 260px;
+            top: -20px;
+            left: -20px;
+        }
+
+        .orbit-ring-2 {
+            width: 300px;
+            height: 300px;
+            top: -40px;
+            left: -40px;
+            animation-duration: 20s;
+            animation-direction: reverse;
+        }
+
+        .orbit-ring-3 {
+            width: 340px;
+            height: 340px;
+            top: -60px;
+            left: -60px;
+            animation-duration: 25s;
+        }
+
+        @keyframes orbitRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .orbit-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .dot-1 {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .dot-2 {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .hero-content {
+            max-width: 1000px;
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #ffd700 50%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleFade 1.5s ease-out;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes titleFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .subtitle {
+            font-size: 2em;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 15px;
+            font-weight: 600;
+            animation: titleFade 1.5s ease-out 0.3s both;
+        }
+
+        .hero .year {
+            font-size: 1.4em;
+            color: rgba(255, 215, 0, 0.9);
+            font-weight: 500;
+            animation: titleFade 1.5s ease-out 0.6s both;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 4em;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            color: white;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd700, #ff8c00);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.3em;
+            margin-top: 25px;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 0 40px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: glassShimmer 5s infinite;
+        }
+
+        @keyframes glassShimmer {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .glass-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 215, 0, 0.4);
+            box-shadow: 
+                0 20px 60px rgba(255, 215, 0, 0.3),
+                inset 0 0 60px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Career Objective */
+        .objective-content {
+            font-size: 1.5em;
+            line-height: 2;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .objective-icon {
+            font-size: 5em;
+            margin-bottom: 35px;
+            display: block;
+            filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 45px 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd700, #ff8c00, #ffd700);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .skill-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        .skill-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 
+                0 25px 70px rgba(255, 215, 0, 0.4),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(255, 140, 0, 0.4);
+        }
+
+        .skill-item:hover .skill-icon {
+            transform: rotateY(360deg) scale(1.1);
+            box-shadow: 0 15px 60px rgba(255, 140, 0, 0.6);
+        }
+
+        .skill-item h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        .skill-item p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1em;
+            line-height: 1.6;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 35px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 50px 40px;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 25px 70px rgba(255, 215, 0, 0.4);
+        }
+
+        .project-icon {
+            font-size: 5em;
+            margin-bottom: 25px;
+            animation: projectBounce 2s ease-in-out infinite;
+        }
+
+        @keyframes projectBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .project-card h3 {
+            font-size: 2em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .project-card p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            padding: 45px 35px;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+        }
+
+        .contact-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8em;
+            animation: contactPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes contactPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 50px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .contact-card h3 {
+            font-size: 1.4em;
+            color: #ffd700;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .contact-card a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 80px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .footer-highlight {
+            color: #ffd700;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3em;
+            }
+
+            .hero .subtitle {
+                font-size: 1.5em;
+            }
+
+            .section-title {
+                font-size: 2.5em;
+            }
+
+            .skills-grid,
+            .contact-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 15px;
+                padding: 20px 30px;
+            }
+
+            .profile-circle {
+                width: 170px;
+                height: 170px;
+            }
+
+            .profile-avatar {
+                font-size: 4em;
+            }
+
+            .glass-card {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="wave-background">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#objective">Objective</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Hero Section -->
+        <div class="hero" id="home">
+            <div class="profile-container">
+                <div class="profile-circle">
+                    <div class="orbit-ring orbit-ring-1">
+                        <div class="orbit-dot dot-1"></div>
+                    </div>
+                    <div class="orbit-ring orbit-ring-2"></div>
+                    <div class="orbit-ring orbit-ring-3">
+                        <div class="orbit-dot dot-2"></div>
+                    </div>
+                    <div class="profile-avatar">JC</div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1>Jeremias B. Cabahug Jr.</h1>
+                <p class="subtitle">Bachelor of Science in Information Technology</p>
+                <p class="year">3rd Year Student</p>
+            </div>
+        </div>
+
+        <!-- Career Objective -->
+        <section id="objective">
+            <div class="section-header">
+                <h2 class="section-title">Career Objective</h2>
+                <p class="section-subtitle">My Professional Vision</p>
+            </div>
+            <div class="glass-card">
+                <span class="objective-icon">🎯</span>
+                <p class="objective-content">
+                    To obtain a challenging position in a reputable organization where I can develop my communication, leadership, and problem-solving skills while contributing positively to the growth and success of the company. I aim to continuously learn, improve my abilities, and become a responsible and productive professional.
+                </p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <p class="section-subtitle">My Core Competencies</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-icon">💬</div>
+                    <h3>Communication Skills</h3>
+                    <p>Effective verbal and written communication to convey ideas clearly and collaborate efficiently</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🤝</div>
+                    <h3>Teamwork & Collaboration</h3>
+                    <p>Strong ability to work harmoniously with diverse teams toward common goals</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🧩</div>
+                    <h3>Problem-Solving</h3>
+                    <p>Analytical thinking and creative approaches to identify and resolve challenges</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">⏰</div>
+                    <h3>Time Management</h3>
+                    <p>Efficient task prioritization and deadline management for optimal productivity</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">💻</div>
+                    <h3>Computer Literacy</h3>
+                    <p>Proficient in MS Word, Excel, PowerPoint, and other essential office applications</p>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-icon">🔄</div>
+                    <h3>Adaptability</h3>
+                    <p>Quick learner with flexibility to embrace new technologies and methodologies</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <p class="section-subtitle">My Work & Achievements</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🌐</div>
+                    <h3>Simple Portfolio Website</h3>
+                    <p>A clean and responsive personal portfolio website showcasing my skills, education, and professional journey in the field of Information Technology.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's Connect</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:jeremiascabahug889@gmail.com">jeremiascabahug889@gmail.com</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:09481749774">0948 174 9774</a></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📍</div>
+                    <h3>Address</h3>
+                    <p>Hilantagaan, Santa Fe, Cebu</p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">👤</div>
+                    <h3>Social Media</h3>
+                    <p>Facebook/LinkedIn:<br>Jeremias Cabahug</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 <span class="footer-highlight">Jeremias B. Cabahug Jr.</span> All Rights Reserved.</p>
+        <p>Aspiring IT Professional | <span class="footer-highlight">Dedicated</span> to Continuous Learning and Growth</p>
+    </footer>
+</body>
+</html>
